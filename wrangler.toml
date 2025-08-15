@@ -16,4 +16,4 @@ watch_dir = "content"
 
 [build.environment_variables]
 HUGO_VERSION = "0.148.2"
-NODE_VERSION = "18"
+NODE_VERSION = "20"
