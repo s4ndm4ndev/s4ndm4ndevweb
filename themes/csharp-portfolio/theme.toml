@@ -1,0 +1,59 @@
+# Theme metadata
+name = "S4NDY C#"
+license = "MIT"
+licenselink = "https://github.com/yourusername/csharp-portfolio-theme/blob/main/LICENSE"
+description = "A Hugo theme for C# developers inspired by JetBrains Rider's color schemes"
+homepage = "https://github.com/yourusername/csharp-portfolio-theme"
+tags = ["portfolio", "developer", "csharp", "jetbrains", "rider", "dark-mode", "responsive"]
+features = ["responsive", "dark-mode", "syntax-highlighting", "portfolio"]
+min_version = "0.112.0"
+
+[author]
+  name = "S4NDM4N"
+  homepage = "https://yourwebsite.com"
+
+# Theme configuration options
+[params]
+  # Theme settings
+  [params.theme]
+    # Default theme mode: "auto", "light", or "dark"
+    defaultMode = "auto"
+    # Enable theme toggle button
+    enableToggle = true
+    # Enable typing animation in hero section
+    enableTypingAnimation = true
+
+  # Portfolio sections
+  [params.sections]
+    # Enable/disable sections
+    hero = true
+    about = true
+    projects = true
+    skills = true
+    contact = true
+
+  # Social links configuration
+  [params.social]
+    # Social media usernames (leave empty to hide)
+    github = "https://github.com/s4ndm4n82"
+    linkedin = ""
+    twitter = ""
+    email = "sadaruwan12@gmail.com"
+
+  # SEO and meta
+  [params.seo]
+    # Default meta description
+    description = "Portfolio website of a C# developer"
+    # Default keywords
+    keywords = ["developer", "portfolio", "csharp", "dotnet"]
+    # Author name for meta tags
+    author = "S4NDM4N"
+
+  # Performance settings
+  [params.performance]
+    # Enable critical CSS inlining
+    inlineCriticalCSS = true
+    # Enable font display swap
+    fontDisplaySwap = true
+    # Enable asset minification
+    minifyAssets = true

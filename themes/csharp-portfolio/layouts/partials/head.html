@@ -1,0 +1,535 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- Resource hints for performance -->
+{{ partial "resource-hints.html" . }}
+
+<!-- SEO Meta Tags -->
+<title>
+	{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title
+	}}{{ end }}
+</title>
+<meta
+	name="description"
+	content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description | default .Site.Title }}{{ end }}" />
+<meta name="author" content="{{ .Site.Params.author | default .Site.Title }}" />
+
+<!-- Open Graph / Facebook -->
+<meta
+	property="og:type"
+	content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta
+	property="og:title"
+	content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}" />
+<meta
+	property="og:description"
+	content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description | default .Site.Title }}{{ end }}" />
+{{ if .Site.Params.image }}<meta
+	property="og:image"
+	content="{{ .Site.Params.image | absURL }}" />{{ end }}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="{{ .Permalink }}" />
+<meta
+	property="twitter:title"
+	content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}" />
+<meta
+	property="twitter:description"
+	content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description | default .Site.Title }}{{ end }}" />
+{{ if .Site.Params.image }}<meta
+	property="twitter:image"
+	content="{{ .Site.Params.image | absURL }}" />{{ end }}
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ .Permalink }}" />
+
+<!-- RSS Feed -->
+{{ with .OutputFormats.Get "rss" -}} {{ printf `<link
+	rel="%s"
+	type="%s"
+	href="%s"
+	title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }} {{
+end -}}
+
+<!-- Favicon and PWA manifest -->
+<link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}"> <link
+rel="manifest" href="{{ "manifest.webmanifest" | relURL }}">
+<link
+	rel="apple-touch-icon"
+	sizes="180x180"
+	href="/images/apple-touch-icon.png" />
+<link
+	rel="icon"
+	type="image/png"
+	sizes="32x32"
+	href="/images/favicon-32x32.png" />
+<link
+	rel="icon"
+	type="image/png"
+	sizes="16x16"
+	href="/images/favicon-16x16.png" />
+<link rel="manifest" href="/images/site.webmanifest" />
+
+<!-- PWA meta tags -->
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="{{ .Site.Title }}" />
+
+<!-- PWA icons -->
+<link rel="apple-touch-icon" href="{{ "images/icon-192.png" | relURL }}"> <link
+rel="apple-touch-icon" sizes="192x192" href="{{ "images/icon-192.png" | relURL
+}}"> <link rel="apple-touch-icon" sizes="512x512" href="{{ "images/icon-512.png"
+| relURL }}">
+
+<!-- Optimized font loading with preconnect and font-display: swap -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Preload critical font weights -->
+<link
+	rel="preload"
+	href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+	as="style"
+	onload="this.onload=null;this.rel='stylesheet'" />
+
+<!-- Fallback for no-JS -->
+<noscript>
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" />
+</noscript>
+
+<!-- Local font fallback CSS -->
+<style>
+	/* Font face declarations with font-display: swap for optimal loading */
+	@font-face {
+		font-family: "JetBrains Mono Fallback";
+		src: local("Consolas"), local("Monaco"), local("Menlo"),
+			local("monospace");
+		font-display: swap;
+		font-weight: 400;
+		font-style: normal;
+	}
+
+	/* Ensure font-display: swap is applied to all font variations */
+	@supports (font-display: swap) {
+		* {
+			font-display: swap;
+		}
+	}
+</style>
+
+<!-- Theme CSS with optimized asset pipeline -->
+{{ $sassOptions := (dict "targetPath" "css/main.css" "outputStyle" "compressed"
+"enableSourceMap" (not hugo.IsProduction) "includePaths" (slice
+"themes/csharp-portfolio/assets/css") ) }} {{ $style := resources.Get
+"css/main.scss" | css.Sass $sassOptions }}
+
+<link
+	rel="stylesheet"
+	href="{{ $style.RelPermalink }}"
+	{{
+	if
+	hugo.IsProduction
+	}}integrity="{{ $style.Data.Integrity }}"
+	{{
+	end
+	}} />
+
+<!-- Theme color meta tags for browser UI -->
+<meta
+	name="theme-color"
+	content="#ffffff"
+	media="(prefers-color-scheme: light)" />
+<meta
+	name="theme-color"
+	content="#2b2b2b"
+	media="(prefers-color-scheme: dark)" />
+
+<!-- Critical CSS inlined for above-the-fold content -->
+<style>
+	/* Critical CSS to prevent FOUC and optimize initial render */
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+	html {
+		font-size: 16px;
+		scroll-behavior: smooth;
+	}
+	body {
+		font-family: "JetBrains Mono", "Fira Code", "Consolas", "Monaco",
+			monospace;
+		margin: 0;
+		padding: 0;
+		line-height: 1.6;
+		transition: background-color 0.3s ease, color 0.3s ease;
+		overflow-x: hidden;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* CSS Custom Properties for theme switching */
+	:root {
+		--font-mono: "JetBrains Mono", "Fira Code", "Consolas", "Monaco",
+			monospace;
+		--font-sans: "Segoe UI", "Roboto", sans-serif;
+		--transition-fast: 0.15s;
+		--transition-normal: 0.3s;
+		--ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+		--border-radius: 0.375rem;
+		--focus-outline: #0066cc;
+	}
+
+	/* Light theme (default) */
+	:root,
+	[data-theme="light"] {
+		--bg-primary: #ffffff;
+		--bg-secondary: #f8f9fa;
+		--text-primary: #000000;
+		--text-secondary: #333333;
+		--text-muted: #666666;
+		--border-color: #e1e5e9;
+		--hover-bg: #f0f0f0;
+		--active-bg: #e6e6e6;
+		--color-keyword: #0000ff;
+		--color-string: #008000;
+		--color-comment: #808080;
+		--color-number: #1750eb;
+		--color-type: #267f99;
+		--color-accent: #0066cc;
+		--color-method: #795e26;
+	}
+
+	/* Dark theme */
+	[data-theme="dark"] {
+		--bg-primary: #2b2b2b;
+		--bg-secondary: #3c3f41;
+		--text-primary: #a9b7c6;
+		--text-secondary: #bababa;
+		--text-muted: #808080;
+		--border-color: #555555;
+		--hover-bg: #4c5052;
+		--active-bg: #5c6164;
+		--color-keyword: #cc7832;
+		--color-string: #6a8759;
+		--color-comment: #808080;
+		--color-number: #6897bb;
+		--color-type: #ffc66d;
+		--color-accent: #6897bb;
+		--color-method: #ffc66d;
+	}
+
+	/* Auto theme using system preference */
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme]) {
+			--bg-primary: #2b2b2b;
+			--bg-secondary: #3c3f41;
+			--text-primary: #a9b7c6;
+			--text-secondary: #bababa;
+			--text-muted: #808080;
+			--border-color: #555555;
+			--hover-bg: #4c5052;
+			--active-bg: #5c6164;
+			--color-keyword: #cc7832;
+			--color-string: #6a8759;
+			--color-comment: #808080;
+			--color-number: #6897bb;
+			--color-type: #ffc66d;
+			--color-accent: #6897bb;
+			--color-method: #ffc66d;
+		}
+	}
+
+	body {
+		background-color: var(--bg-primary);
+		color: var(--text-primary);
+	}
+
+	/* Critical header styles */
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		background-color: var(--bg-primary);
+		border-bottom: 1px solid var(--border-color);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+	}
+
+	.header-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 1rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.site-logo {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--color-keyword);
+		text-decoration: none;
+	}
+
+	/* Critical navigation styles */
+	.main-navigation {
+		display: none;
+	}
+	@media (min-width: 768px) {
+		.main-navigation {
+			display: flex;
+			gap: 2rem;
+		}
+		.nav-link {
+			color: var(--text-secondary);
+			text-decoration: none;
+			font-family: var(--font-mono);
+			font-size: 0.875rem;
+			transition: color var(--transition-fast) var(--ease-in-out);
+		}
+		.nav-link:hover {
+			color: var(--color-accent);
+		}
+	}
+
+	/* Critical mobile navigation */
+	.mobile-nav-toggle {
+		display: block;
+		background: none;
+		border: none;
+		color: var(--text-primary);
+		font-size: 1.5rem;
+		cursor: pointer;
+		padding: 0.5rem;
+	}
+	@media (min-width: 768px) {
+		.mobile-nav-toggle {
+			display: none;
+		}
+	}
+
+	/* Critical hero section styles */
+	.hero-section {
+		min-height: 60vh;
+		display: flex;
+		align-items: center;
+		padding: 2rem 0;
+		text-align: center;
+	}
+
+	.hero-title {
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-weight: 700;
+		margin: 0 0 1rem 0;
+		color: var(--text-primary);
+		font-family: var(--font-mono);
+	}
+
+	.hero-subtitle {
+		font-size: clamp(1rem, 2.5vw, 1.25rem);
+		color: var(--color-comment);
+		margin: 0 0 2rem 0;
+		font-family: var(--font-mono);
+		font-style: italic;
+	}
+
+	/* Critical container styles */
+	.container {
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+	@media (min-width: 768px) {
+		.container {
+			padding: 0 2rem;
+		}
+	}
+
+	/* Hide content until fonts load to prevent layout shift */
+	.font-loading * {
+		visibility: hidden;
+	}
+	.font-loading .site-header,
+	.font-loading .hero-section {
+		visibility: visible;
+	}
+
+	/* Critical button styles */
+	.btn {
+		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		border: 2px solid;
+		border-radius: var(--border-radius);
+		font-family: var(--font-mono);
+		font-size: 0.875rem;
+		text-decoration: none;
+		cursor: pointer;
+		transition: all var(--transition-fast) var(--ease-in-out);
+	}
+
+	.btn-primary {
+		background-color: var(--color-accent);
+		color: #ffffff;
+		border-color: var(--color-accent);
+	}
+
+	/* Critical theme toggle styles */
+	.theme-toggle {
+		background: none;
+		border: 2px solid var(--border-color);
+		border-radius: var(--border-radius);
+		padding: 0.5rem;
+		color: var(--text-primary);
+		cursor: pointer;
+		font-family: var(--font-mono);
+		font-size: 0.875rem;
+		transition: all var(--transition-fast) var(--ease-in-out);
+	}
+</style>
+
+<!-- Theme detection script (inline to prevent FOUC) -->
+<script>
+	(function () {
+		// Theme detection and initial setup
+		const STORAGE_KEY = "csharp-portfolio-theme";
+		const THEMES = { LIGHT: "light", DARK: "dark", AUTO: "auto" };
+
+		function getStoredTheme() {
+			try {
+				return localStorage.getItem(STORAGE_KEY);
+			} catch (e) {
+				return null;
+			}
+		}
+
+		function getSystemTheme() {
+			if (
+				window.matchMedia &&
+				window.matchMedia("(prefers-color-scheme: dark)").matches
+			) {
+				return THEMES.DARK;
+			}
+			return THEMES.LIGHT;
+		}
+
+		function applyTheme(theme) {
+			const root = document.documentElement;
+
+			// Remove existing theme attributes
+			root.removeAttribute("data-theme");
+
+			if (theme === THEMES.AUTO) {
+				// Let CSS handle auto theme via prefers-color-scheme
+			} else {
+				// Set explicit theme
+				root.setAttribute("data-theme", theme);
+			}
+
+			// Also set body class for immediate styling
+			document.body.className = document.body.className.replace(
+				/theme-\w+/g,
+				""
+			);
+			if (theme !== THEMES.AUTO) {
+				document.body.classList.add("theme-" + theme);
+			} else {
+				document.body.classList.add("theme-" + getSystemTheme());
+			}
+		}
+
+		// Set initial theme immediately to prevent FOUC
+		const storedTheme = getStoredTheme();
+		const systemTheme = getSystemTheme();
+		const initialTheme = storedTheme || systemTheme;
+
+		applyTheme(initialTheme);
+
+		// Store the theme if it wasn't already stored
+		if (!storedTheme) {
+			try {
+				localStorage.setItem(STORAGE_KEY, initialTheme);
+			} catch (e) {
+				// Ignore localStorage errors
+			}
+		}
+	})();
+</script>
+
+<!-- Font loading optimization -->
+<script>
+	// Add font-loading class to prevent layout shift
+	document.documentElement.classList.add("font-loading");
+
+	// Remove font-loading class when fonts are loaded
+	document.fonts.ready.then(function () {
+		document.documentElement.classList.remove("font-loading");
+	});
+
+	// Service Worker registration for performance optimization
+	if ('serviceWorker' in navigator && {{ hugo.IsProduction }}) {
+		window.addEventListener('load', function() {
+			navigator.serviceWorker.register('/sw.js')
+				.then(function(registration) {
+					console.log('SW registered: ', registration);
+				})
+				.catch(function(registrationError) {
+					console.log('SW registration failed: ', registrationError);
+				});
+		});
+	}
+</script>
+
+<!-- Optimized JavaScript loading with bundling and minification -->
+{{ if hugo.IsProduction }}
+<!-- Production: Bundle and minify all JavaScript -->
+{{ $themeToggleJS := resources.Get "js/theme-toggle.js" }} {{ $navigationJS :=
+resources.Get "js/navigation.js" }} {{ $typingJS := resources.Get
+"js/typing-animation.js" }} {{ $contactFormJS := resources.Get
+"js/contact-form.js" }} {{ $accessibilityJS := resources.Get
+"js/accessibility.js" }} {{ $experienceCalculatorJS := resources.Get
+"js/experience-calculator.js" }} {{ $jsBundle := slice $themeToggleJS $navigationJS
+$typingJS $contactFormJS $accessibilityJS $experienceCalculatorJS | resources.Concat "js/bundle.js" |
+resources.Minify | resources.Fingerprint "sha256" }}
+
+<script
+	src="{{ $jsBundle.RelPermalink }}"
+	integrity="{{ $jsBundle.Data.Integrity }}"
+	defer></script>
+{{ else }}
+<!-- Development: Load individual files for easier debugging -->
+{{ $themeToggleJS := resources.Get "js/theme-toggle.js" }}
+<script src="{{ $themeToggleJS.RelPermalink }}" defer></script>
+
+{{ $navigationJS := resources.Get "js/navigation.js" }}
+<script src="{{ $navigationJS.RelPermalink }}" defer></script>
+
+{{ $typingJS := resources.Get "js/typing-animation.js" }}
+<script src="{{ $typingJS.RelPermalink }}" defer></script>
+
+{{ $contactFormJS := resources.Get "js/contact-form.js" }}
+<script src="{{ $contactFormJS.RelPermalink }}" defer></script>
+
+{{ $accessibilityJS := resources.Get "js/accessibility.js" }}
+<script src="{{ $accessibilityJS.RelPermalink }}" defer></script>
+
+{{ $experienceCalculatorJS := resources.Get "js/experience-calculator.js" }}
+<script src="{{ $experienceCalculatorJS.RelPermalink }}" defer></script>
+{{ end }}
+
+<!-- Preload critical JavaScript for better performance -->
+{{ if hugo.IsProduction }} {{ $jsBundle := slice (resources.Get
+"js/theme-toggle.js") (resources.Get "js/navigation.js") (resources.Get
+"js/typing-animation.js") (resources.Get "js/contact-form.js") (resources.Get
+"js/accessibility.js") (resources.Get "js/experience-calculator.js") |
+resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint
+"sha256" }}
+<link rel="preload" href="{{ $jsBundle.RelPermalink }}" as="script" />
+{{ end }}

@@ -1,0 +1,141 @@
+{{/* Project Card Partial - Styled as C# Class Definition */}}
+<article
+	class="project-card"
+	role="article"
+	aria-labelledby="project-title-{{ .File.BaseFileName }}">
+	<div class="project-header">
+		<div class="project-class-definition">
+			<span class="project-keyword" aria-hidden="true">public</span>
+			<span class="project-keyword" aria-hidden="true">class</span>
+			<h3
+				id="project-title-{{ .File.BaseFileName }}"
+				class="project-title">
+				{{ .Title }}
+			</h3>
+			<span class="project-inheritance" aria-hidden="true"
+				>: IProject</span
+			>
+		</div>
+		<div class="project-brace" aria-hidden="true">{</div>
+	</div>
+
+	<div class="project-body">
+		{{/* Project Description as XML Comment */}}
+		<div class="project-description">
+			<span class="project-xml-comment" aria-hidden="true"
+				>/// &lt;summary&gt;</span
+			>
+			<p class="project-xml-comment" aria-label="Project description">
+				<span aria-hidden="true">/// </span>{{ .Params.description |
+				default .Summary }}
+			</p>
+			<span class="project-xml-comment" aria-hidden="true"
+				>/// &lt;/summary&gt;</span
+			>
+		</div>
+
+		{{/* Technologies as C# Attributes */}} {{ if .Params.technologies }}
+		<div
+			class="project-attributes"
+			role="list"
+			aria-label="Technologies used">
+			{{ range .Params.technologies }}
+			<div class="project-attribute" role="listitem">
+				<span class="attribute-bracket" aria-hidden="true">[</span
+				><span class="attribute-name">{{ . }}</span
+				><span class="attribute-bracket" aria-hidden="true">]</span>
+			</div>
+			{{ end }}
+		</div>
+		{{ end }} {{/* Project Properties */}}
+		<div class="project-properties">
+			{{ if .Params.github }}
+			<div class="project-property">
+				<span class="property-keyword">public</span>
+				<span class="property-type">string</span>
+				<span class="property-name">Repository</span>
+				<span class="property-operator">=</span>
+				<a
+					href="{{ .Params.github }}"
+					target="_blank"
+					rel="noopener"
+					class="property-value property-string"
+					>{{ .Params.github }}</a
+				>
+				<span class="property-semicolon">;</span>
+			</div>
+			{{ end }} {{ if .Params.demo }}
+			<div class="project-property">
+				<span class="property-keyword">public</span>
+				<span class="property-type">string</span>
+				<span class="property-name">Demo</span>
+				<span class="property-operator">=</span>
+				<a
+					href="{{ .Params.demo }}"
+					target="_blank"
+					rel="noopener"
+					class="property-value property-string"
+					>{{ .Params.demo }}</a
+				>
+				<span class="property-semicolon">;</span>
+			</div>
+			{{ end }}
+
+			<div class="project-property">
+				<span class="property-keyword">public</span>
+				<span class="property-type">DateTime</span>
+				<span class="property-name">Created</span>
+				<span class="property-operator">=</span>
+				<span class="property-value"
+					>{{ .Date.Format "2006-01-02" }}</span
+				>
+				<span class="property-semicolon">;</span>
+			</div>
+		</div>
+
+		{{/* Project Methods (Actions) */}}
+		<div class="project-methods" role="group" aria-label="Project actions">
+			{{ if .Params.demo }}
+			<a
+				href="{{ .Params.demo }}"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="project-method-link"
+				aria-label="View live demo of {{ .Title }} (opens in new tab)">
+				<span class="method-keyword" aria-hidden="true">public</span>
+				<span class="method-return-type" aria-hidden="true">void</span>
+				<span class="method-name">View Demo</span>
+				<span class="method-params" aria-hidden="true">()</span>
+			</a>
+			{{ end }} {{ if .Params.github }}
+			<a
+				href="{{ .Params.github }}"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="project-method-link"
+				aria-label="View source code of {{ .Title }} on GitHub (opens in new tab)">
+				<span class="method-keyword" aria-hidden="true">public</span>
+				<span class="method-return-type" aria-hidden="true">void</span>
+				<span class="method-name">View Source</span>
+				<span class="method-params" aria-hidden="true">()</span>
+			</a>
+			{{ end }}
+
+			<a
+				href="{{ .Permalink }}"
+				class="project-method-link"
+				aria-label="View detailed information about {{ .Title }}">
+				<span class="method-keyword" aria-hidden="true">public</span>
+				<span class="method-return-type" aria-hidden="true"
+					>ProjectDetails</span
+				>
+				<span class="method-name">View Details</span>
+				<span class="method-params" aria-hidden="true">()</span>
+			</a>
+		</div>
+	</div>
+
+	<div class="project-footer">
+		<div class="project-brace" aria-hidden="true">}</div>
+	</div>
+</article>

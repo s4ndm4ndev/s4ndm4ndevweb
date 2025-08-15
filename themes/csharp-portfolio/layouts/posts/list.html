@@ -1,0 +1,159 @@
+{{ define "main" }}
+<div class="container">
+	<section class="posts-list section">
+		<div class="posts-list-content">
+			<div class="posts-list-header">
+				<h1 class="posts-list-title">Blog Posts</h1>
+				<div class="posts-list-meta">
+					<span class="posts-count">
+						<span class="code-comment"
+							>// Found {{ len .Pages }} {{ if eq (len .Pages) 1
+							}}post{{ else }}posts{{ end }}</span
+						>
+					</span>
+				</div>
+			</div>
+
+			{{ if .Pages }}
+			<div class="posts-grid">
+				{{ range .Pages }}
+				<article class="post-card">
+					<div class="post-card-header">
+						<div class="post-class-definition">
+							<span class="post-keyword">public</span>
+							<span class="post-keyword">class</span>
+							<h2 class="post-card-title">
+								<a
+									href="{{ .Permalink }}"
+									class="post-title-link"
+									>{{ .Title }}</a
+								>
+							</h2>
+						</div>
+						<div class="post-brace">{</div>
+					</div>
+
+					<div class="post-card-body">
+						{{ if .Description }}
+						<div class="post-xml-comment">
+							<span>/// &lt;summary&gt;</span>
+							<span>/// {{ .Description }}</span>
+							<span>/// &lt;/summary&gt;</span>
+						</div>
+						{{ else if .Summary }}
+						<div class="post-xml-comment">
+							<span>/// &lt;summary&gt;</span>
+							<span>/// {{ .Summary | truncate 120 }}</span>
+							<span>/// &lt;/summary&gt;</span>
+						</div>
+						{{ end }}
+
+						<div class="post-properties">
+							<div class="post-property">
+								<span class="property-keyword">public</span>
+								<span class="property-type">DateTime</span>
+								<span class="property-name">Published</span>
+								<span class="property-operator">=</span>
+								<span class="property-value"
+									>{{ .Date.Format "January 2, 2006" }}</span
+								>
+								<span class="property-semicolon">;</span>
+							</div>
+
+							{{ if .Params.author }}
+							<div class="post-property">
+								<span class="property-keyword">public</span>
+								<span class="property-type">string</span>
+								<span class="property-name">Author</span>
+								<span class="property-operator">=</span>
+								<span class="property-value property-string"
+									>"{{ .Params.author }}"</span
+								>
+								<span class="property-semicolon">;</span>
+							</div>
+							{{ end }}
+
+							<div class="post-property">
+								<span class="property-keyword">public</span>
+								<span class="property-type">int</span>
+								<span class="property-name">ReadingTime</span>
+								<span class="property-operator">=</span>
+								<span class="property-value"
+									>{{ .ReadingTime }}</span
+								>
+								<span class="property-semicolon">;</span>
+								<span class="property-comment">
+									// minutes</span
+								>
+							</div>
+
+							{{ if .Params.tags }}
+							<div class="post-property">
+								<span class="property-keyword">public</span>
+								<span class="property-type">string[]</span>
+								<span class="property-name">Tags</span>
+								<span class="property-operator">=</span>
+								<span class="property-value">
+									{ {{ range $index, $tag := .Params.tags }}
+									{{ if $index }}, {{ end }}"{{ $tag }}" {{
+									end }} }
+								</span>
+								<span class="property-semicolon">;</span>
+							</div>
+							{{ end }}
+						</div>
+					</div>
+
+					<div class="post-card-footer">
+						<div class="post-actions">
+							<a
+								href="{{ .Permalink }}"
+								class="btn btn-outline post-action-btn">
+								<span class="btn-return-type">void</span>
+								<span class="btn-method">ReadPost</span>
+								<span class="btn-params">()</span>
+							</a>
+						</div>
+						<div class="post-brace">}</div>
+					</div>
+				</article>
+				{{ end }}
+			</div>
+			{{ else }}
+			<div class="posts-empty">
+				<div class="empty-state">
+					<div class="empty-code-block">
+						<span class="code-keyword">if</span>
+						<span class="code-parentheses">(</span
+						><span class="code-variable">posts</span
+						><span class="code-dot">.</span
+						><span class="code-property">Count</span>
+						<span class="code-operator">==</span>
+						<span class="code-number">0</span
+						><span class="code-parentheses">)</span>
+						<br />
+						<span class="code-brace">{</span>
+						<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-type"
+							>Console</span
+						><span class="code-dot">.</span
+						><span class="code-method">WriteLine</span
+						><span class="code-parentheses">(</span
+						><span class="code-string"
+							>"No posts found. Check back soon!"</span
+						><span class="code-parentheses">)</span
+						><span class="code-semicolon">;</span>
+						<br />
+						<span class="code-brace">}</span>
+					</div>
+					<p class="empty-description">
+						Blog posts are coming soon. Check back later for
+						insights and tutorials!
+					</p>
+				</div>
+			</div>
+			{{ end }}
+		</div>
+	</section>
+</div>
+{{ end }}

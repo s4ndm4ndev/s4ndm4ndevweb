@@ -1,0 +1,85 @@
+<header class="site-header" role="banner">
+	<div class="container">
+		<div class="header-content">
+			<!-- Logo/Brand -->
+			<div class="site-brand">
+				<a href="{{ "/" | relURL }}" class="brand-link">
+					<span class="brand-namespace">Portfolio</span><span class="brand-separator">.</span><span class="brand-class">{{ .Site.Params.author | default "Developer" }}</span>
+				</a>
+			</div>
+
+			<!-- Main Navigation -->
+			<nav class="main-navigation" role="navigation" aria-label="Main navigation">
+				<ul class="nav-list" role="list">
+					<li class="nav-item">
+						<a href="{{ "/" | relURL }}" class="nav-link {{ if .IsHome }}active{{ end }}" {{ if .IsHome }}aria-current="page"{{ end }}>
+							<span class="nav-method">Home</span><span class="nav-parentheses" aria-hidden="true">()</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ "/about" | relURL }}" class="nav-link {{ if eq .Section "about" }}active{{ end }}" {{ if eq .Section "about" }}aria-current="page"{{ end }}>
+							<span class="nav-method">About</span><span class="nav-parentheses" aria-hidden="true">()</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ "/projects" | relURL }}" class="nav-link {{ if eq .Section "projects" }}active{{ end }}" {{ if eq .Section "projects" }}aria-current="page"{{ end }}>
+							<span class="nav-method">Projects</span><span class="nav-parentheses" aria-hidden="true">()</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ "/contact" | relURL }}" class="nav-link {{ if eq .Section "contact" }}active{{ end }}" {{ if eq .Section "contact" }}aria-current="page"{{ end }}>
+							<span class="nav-method">Contact</span><span class="nav-parentheses" aria-hidden="true">()</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+
+			<!-- Mobile Navigation Toggle -->
+			<button
+				type="button"
+				class="mobile-nav-toggle"
+				aria-label="Toggle mobile navigation menu"
+				aria-expanded="false"
+				aria-controls="mobile-navigation"
+				data-voice-command="menu">
+				<span class="hamburger-line" aria-hidden="true"></span>
+				<span class="hamburger-line" aria-hidden="true"></span>
+				<span class="hamburger-line" aria-hidden="true"></span>
+				<span class="sr-only">Menu</span>
+			</button>
+
+			<!-- Header Actions -->
+			<div class="header-actions">
+				{{ partial "theme-toggle.html" . }}
+			</div>
+		</div>
+
+		<!-- Mobile Navigation Menu -->
+		<div class="mobile-navigation" id="mobile-navigation" aria-hidden="true">
+			<nav class="mobile-nav" role="navigation" aria-label="Mobile navigation">
+				<ul class="mobile-nav-list" role="list">
+					<li class="mobile-nav-item">
+						<a href="{{ "/" | relURL }}" class="mobile-nav-link {{ if .IsHome }}active{{ end }}" {{ if .IsHome }}aria-current="page"{{ end }}>
+							<span class="nav-namespace" aria-hidden="true">Portfolio.</span><span class="nav-method">Home</span><span class="nav-parentheses" aria-hidden="true">()</span>
+						</a>
+					</li>
+					<li class="mobile-nav-item">
+						<a href="{{ "/about" | relURL }}" class="mobile-nav-link {{ if eq .Section "about" }}active{{ end }}" {{ if eq .Section "about" }}aria-current="page"{{ end }}>
+							<span class="nav-namespace" aria-hidden="true">Portfolio.</span><span class="nav-method">About</span><span class="nav-parentheses" aria-hidden="true">()</span>
+						</a>
+					</li>
+					<li class="mobile-nav-item">
+						<a href="{{ "/projects" | relURL }}" class="mobile-nav-link {{ if eq .Section "projects" }}active{{ end }}" {{ if eq .Section "projects" }}aria-current="page"{{ end }}>
+							<span class="nav-namespace" aria-hidden="true">Portfolio.</span><span class="nav-method">Projects</span><span class="nav-parentheses" aria-hidden="true">()</span>
+						</a>
+					</li>
+					<li class="mobile-nav-item">
+						<a href="{{ "/contact" | relURL }}" class="mobile-nav-link {{ if eq .Section "contact" }}active{{ end }}" {{ if eq .Section "contact" }}aria-current="page"{{ end }}>
+							<span class="nav-namespace" aria-hidden="true">Portfolio.</span><span class="nav-method">Contact</span><span class="nav-parentheses" aria-hidden="true">()</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>

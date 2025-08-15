@@ -1,0 +1,53 @@
+{{ define "main" }}
+<div class="container">
+	<article class="single-page">
+		<header class="page-header">
+			<h1 class="page-title">{{ .Title }}</h1>
+			{{ with .Description }}
+				<p class="page-description text-comment">{{ . }}</p>
+			{{ end }}
+			{{ if not .Date.IsZero }}
+				<div class="page-meta">
+					<time class="page-date" datetime="{{ .Date.Format "2006-01-02" }}">
+						<span class="meta-comment">// Last updated:</span>
+						{{ .Date.Format "January 2, 2006" }}
+					</time>
+				</div>
+			{{ end }}
+		</header>
+
+		<div class="page-content">
+			{{ .Content }}
+		</div>
+
+		{{ if eq .Type "about" }}
+			<div class="about-additional">
+				<div class="about-skills-extended">
+					<h3 class="skills-title">Technical Skills</h3>
+					<div class="skills-grid">
+						{{ with .Site.Params.about.skillCategories }}
+							{{ range . }}
+								<div class="skill-category">
+									<h4 class="category-title">{{ .name }}</h4>
+									<div class="category-skills">
+										{{ $category := .category }}
+										{{ range .skills }}
+											<div class="skill-tag">
+												<span class="skill-using">using</span>
+												<span class="skill-namespace">{{ $category | default "System" }}</span>
+												<span class="skill-dot">.</span>
+												<span class="skill-name">{{ . }}</span>
+												<span class="skill-semicolon">;</span>
+											</div>
+										{{ end }}
+									</div>
+								</div>
+							{{ end }}
+						{{ end }}
+					</div>
+				</div>
+			</div>
+		{{ end }}
+	</article>
+</div>
+{{ end }}

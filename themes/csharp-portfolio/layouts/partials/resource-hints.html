@@ -1,0 +1,33 @@
+<!-- Resource hints for performance optimization -->
+
+<!-- DNS prefetch for external resources -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com" />
+<link rel="dns-prefetch" href="//fonts.gstatic.com" />
+
+<!-- Preconnect to critical external domains -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Prefetch next likely pages for faster navigation -->
+{{ if .IsHome }} {{ range .Site.Menus.main }}
+<link rel="prefetch" href="{{ .URL | relURL }}" />
+{{ end }} {{ end }}
+
+<!-- Preload critical images if they exist -->
+{{ if .Site.Params.hero.image }}
+<link rel="preload" href="{{ .Site.Params.hero.image | relURL }}" as="image" />
+{{ end }} {{ if .Site.Params.about.profileImage }}
+<link
+	rel="preload"
+	href="{{ .Site.Params.about.profileImage | relURL }}"
+	as="image" />
+{{ end }}
+
+<!-- Module preload for modern browsers -->
+{{ if hugo.IsProduction }} {{ $jsBundle := slice (resources.Get
+"js/theme-toggle.js") (resources.Get "js/navigation.js") (resources.Get
+"js/typing-animation.js") (resources.Get "js/contact-form.js") |
+resources.Concat "js/bundle.js" | resources.Minify | resources.Fingerprint
+"sha256" }}
+<link rel="modulepreload" href="{{ $jsBundle.RelPermalink }}" />
+{{ end }}

@@ -1,0 +1,161 @@
+{{ define "main" }}
+<div class="container">
+	<article class="post-single section">
+		<div class="post-single-content">
+			{{/* Post Header */}}
+			<header class="post-single-header">
+				<div class="post-breadcrumb">
+					<a href="/" class="breadcrumb-link">
+						<span class="breadcrumb-namespace">Portfolio</span
+						><span class="breadcrumb-dot">.</span
+						><span class="breadcrumb-method">Home</span
+						><span class="breadcrumb-params">()</span>
+					</a>
+					<span class="breadcrumb-separator">&gt;</span>
+					<a href="/posts" class="breadcrumb-link">
+						<span class="breadcrumb-namespace">Portfolio</span
+						><span class="breadcrumb-dot">.</span
+						><span class="breadcrumb-method">Posts</span
+						><span class="breadcrumb-params">()</span>
+					</a>
+					<span class="breadcrumb-separator">&gt;</span>
+					<span class="breadcrumb-current">{{ .Title }}</span>
+				</div>
+
+				<div class="post-class-header">
+					<div class="post-class-definition">
+						<span class="post-keyword">public</span>
+						<span class="post-keyword">class</span>
+						<h1 class="post-title">{{ .Title }}</h1>
+						<span class="post-inheritance">: IPost</span>
+					</div>
+					<div class="post-brace">{</div>
+				</div>
+
+				{{/* Post Meta Information */}}
+				<div class="post-meta">
+					<div class="post-xml-comment">
+						<span>/// &lt;summary&gt;</span>
+						<span
+							>/// {{ .Params.description | default .Summary
+							}}</span
+						>
+						<span>/// &lt;/summary&gt;</span>
+					</div>
+
+					{{ if .Params.tags }}
+					<div class="post-attributes">
+						{{ range .Params.tags }}
+						<div class="post-attribute">
+							<span class="attribute-bracket">[</span
+							><span class="attribute-name">{{ . }}</span
+							><span class="attribute-bracket">]</span>
+						</div>
+						{{ end }}
+					</div>
+					{{ end }}
+
+					<div class="post-properties">
+						<div class="post-property">
+							<span class="property-keyword">public</span>
+							<span class="property-type">DateTime</span>
+							<span class="property-name">Published</span>
+							<span class="property-operator">=</span>
+							<span class="property-value"
+								>{{ .Date.Format "January 2, 2006" }}</span
+							>
+							<span class="property-semicolon">;</span>
+						</div>
+
+						{{ if .Params.author }}
+						<div class="post-property">
+							<span class="property-keyword">public</span>
+							<span class="property-type">string</span>
+							<span class="property-name">Author</span>
+							<span class="property-operator">=</span>
+							<span class="property-value property-string"
+								>"{{ .Params.author }}"</span
+							>
+							<span class="property-semicolon">;</span>
+						</div>
+						{{ end }}
+
+						<div class="post-property">
+							<span class="property-keyword">public</span>
+							<span class="property-type">int</span>
+							<span class="property-name">ReadingTime</span>
+							<span class="property-operator">=</span>
+							<span class="property-value"
+								>{{ .ReadingTime }}</span
+							>
+							<span class="property-semicolon">;</span>
+							<span class="property-comment"> // minutes</span>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			{{/* Table of Contents */}} {{ if and .Params.showTableOfContents
+			.TableOfContents }}
+			<div class="post-toc">
+				<div class="toc-header">
+					<h3 class="toc-title">
+						<span class="code-comment">// Table of Contents</span>
+					</h3>
+				</div>
+				<div class="toc-content">{{ .TableOfContents }}</div>
+			</div>
+			{{ end }} {{/* Post Content */}}
+			<div class="post-content">
+				<div class="post-body">{{ .Content }}</div>
+			</div>
+
+			{{/* Post Footer */}}
+			<footer class="post-single-footer">
+				<div class="post-brace">}</div>
+
+				{{ if .Params.tags }}
+				<div class="post-tags">
+					<span class="tags-label">
+						<span class="code-comment">// Tags:</span>
+					</span>
+					<div class="tags-list">
+						{{ range .Params.tags }}
+						<a href="/tags/{{ . | urlize }}" class="tag-link">
+							<span class="tag-hash">#</span>{{ . }}
+						</a>
+						{{ end }}
+					</div>
+				</div>
+				{{ end }}
+
+				<div class="post-navigation">
+					{{ with .PrevInSection }}
+					<a
+						href="{{ .Permalink }}"
+						class="post-nav-link post-nav-prev">
+						<span class="nav-direction">← Previous</span>
+						<span class="nav-title">{{ .Title }}</span>
+					</a>
+					{{ end }} {{ with .NextInSection }}
+					<a
+						href="{{ .Permalink }}"
+						class="post-nav-link post-nav-next">
+						<span class="nav-direction">Next →</span>
+						<span class="nav-title">{{ .Title }}</span>
+					</a>
+					{{ end }}
+				</div>
+
+				<div class="back-to-posts">
+					<a href="/posts" class="btn btn-outline">
+						<span class="btn-return-type">List&lt;Post&gt;</span>
+						<span class="btn-method">ViewAll</span>
+						<span class="btn-params">()</span>
+					</a>
+				</div>
+			</footer>
+		</div>
+	</article>
+</div>
+{{ end }}

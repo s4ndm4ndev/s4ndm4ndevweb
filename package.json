@@ -1,0 +1,34 @@
+{
+	"name": "csharp-portfolio-theme",
+	"version": "1.0.0",
+	"description": "A Hugo theme inspired by C# coding aesthetics and JetBrains Rider colors",
+	"main": "index.js",
+	"scripts": {
+		"build": "hugo --minify",
+		"dev": "hugo server --disableFastRender",
+		"clean": "rm -rf public resources",
+		"optimize": "hugo --minify --gc"
+	},
+	"keywords": [
+		"hugo",
+		"theme",
+		"portfolio",
+		"csharp",
+		"developer"
+	],
+	"author": "C# Portfolio Theme",
+	"license": "MIT",
+	"devDependencies": {
+		"autoprefixer": "^10.4.16",
+		"cssnano": "^6.0.1",
+		"postcss": "^8.4.31",
+		"postcss-cli": "^10.1.0"
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"Firefox ESR",
+		"not dead",
+		"not IE 11"
+	]
+}

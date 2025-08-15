@@ -1,0 +1,57 @@
+{{ define "main" }}
+<div class="container">
+	<section class="projects-list section">
+		<div class="projects-list-content">
+			<div class="projects-list-header">
+				<h1 class="projects-list-title">All Projects</h1>
+				<div class="projects-list-meta">
+					<span class="projects-count">
+						<span class="code-comment"
+							>// Found {{ len .Pages }} projects</span
+						>
+					</span>
+				</div>
+			</div>
+
+			{{ if .Pages }}
+			<div class="projects-grid">
+				{{ range .Pages }} {{ partial "project-card.html" . }} {{ end }}
+			</div>
+			{{ else }}
+			<div class="projects-empty">
+				<div class="empty-state">
+					<div class="empty-code-block">
+						<span class="code-keyword">if</span>
+						<span class="code-parentheses">(</span
+						><span class="code-variable">projects</span
+						><span class="code-dot">.</span
+						><span class="code-property">Count</span>
+						<span class="code-operator">==</span>
+						<span class="code-number">0</span
+						><span class="code-parentheses">)</span>
+						<br />
+						<span class="code-brace">{</span>
+						<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-type"
+							>Console</span
+						><span class="code-dot">.</span
+						><span class="code-method">WriteLine</span
+						><span class="code-parentheses">(</span
+						><span class="code-string"
+							>"No projects found. Check back soon!"</span
+						><span class="code-parentheses">)</span
+						><span class="code-semicolon">;</span>
+						<br />
+						<span class="code-brace">}</span>
+					</div>
+					<p class="empty-description">
+						Projects are coming soon. Check back later to see my
+						latest work!
+					</p>
+				</div>
+			</div>
+			{{ end }}
+		</div>
+	</section>
+</div>
+{{ end }}

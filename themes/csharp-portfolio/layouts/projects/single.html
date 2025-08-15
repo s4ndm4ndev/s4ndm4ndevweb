@@ -1,0 +1,177 @@
+{{ define "main" }}
+<div class="container">
+	<article class="project-single section">
+		<div class="project-single-content">
+			{{/* Project Header */}}
+			<header class="project-single-header">
+				<div class="project-breadcrumb">
+					<a href="/" class="breadcrumb-link">
+						<span class="breadcrumb-namespace">Portfolio</span
+						><span class="breadcrumb-dot">.</span
+						><span class="breadcrumb-method">Home</span
+						><span class="breadcrumb-params">()</span>
+					</a>
+					<span class="breadcrumb-separator">&gt;</span>
+					<a href="/projects" class="breadcrumb-link">
+						<span class="breadcrumb-namespace">Portfolio</span
+						><span class="breadcrumb-dot">.</span
+						><span class="breadcrumb-method">Projects</span
+						><span class="breadcrumb-params">()</span>
+					</a>
+					<span class="breadcrumb-separator">&gt;</span>
+					<span class="breadcrumb-current">{{ .Title }}</span>
+				</div>
+
+				<div class="project-class-header">
+					<div class="project-class-definition">
+						<span class="project-keyword">public</span>
+						<span class="project-keyword">class</span>
+						<h1 class="project-title">{{ .Title }}</h1>
+						<span class="project-inheritance">: IProject</span>
+					</div>
+					<div class="project-brace">{</div>
+				</div>
+
+				{{/* Project Meta Information */}}
+				<div class="project-meta">
+					<div class="project-xml-comment">
+						<span>/// &lt;summary&gt;</span>
+						<span
+							>/// {{ .Params.description | default .Summary
+							}}</span
+						>
+						<span>/// &lt;/summary&gt;</span>
+					</div>
+
+					{{ if .Params.technologies }}
+					<div class="project-attributes">
+						{{ range .Params.technologies }}
+						<div class="project-attribute">
+							<span class="attribute-bracket">[</span
+							><span class="attribute-name">{{ . }}</span
+							><span class="attribute-bracket">]</span>
+						</div>
+						{{ end }}
+					</div>
+					{{ end }}
+
+					<div class="project-properties">
+						<div class="project-property">
+							<span class="property-keyword">public</span>
+							<span class="property-type">DateTime</span>
+							<span class="property-name">Created</span>
+							<span class="property-operator">=</span>
+							<span class="property-value"
+								>{{ .Date.Format "January 2, 2006" }}</span
+							>
+							<span class="property-semicolon">;</span>
+						</div>
+
+						{{ if .Params.github }}
+						<div class="project-property">
+							<span class="property-keyword">public</span>
+							<span class="property-type">string</span>
+							<span class="property-name">Repository</span>
+							<span class="property-operator">=</span>
+							<a
+								href="{{ .Params.github }}"
+								target="_blank"
+								rel="noopener"
+								class="property-value property-string"
+								>{{ .Params.github }}</a
+							>
+							<span class="property-semicolon">;</span>
+						</div>
+						{{ end }} {{ if .Params.demo }}
+						<div class="project-property">
+							<span class="property-keyword">public</span>
+							<span class="property-type">string</span>
+							<span class="property-name">Demo</span>
+							<span class="property-operator">=</span>
+							<a
+								href="{{ .Params.demo }}"
+								target="_blank"
+								rel="noopener"
+								class="property-value property-string"
+								>{{ .Params.demo }}</a
+							>
+							<span class="property-semicolon">;</span>
+						</div>
+						{{ end }}
+					</div>
+				</div>
+
+				{{/* Action Buttons */}}
+				<div class="project-actions">
+					{{ if .Params.demo }}
+					<a
+						href="{{ .Params.demo }}"
+						target="_blank"
+						rel="noopener"
+						class="btn btn-primary project-action-btn">
+						<span class="btn-return-type">void</span>
+						<span class="btn-method">ViewDemo</span>
+						<span class="btn-params">()</span>
+					</a>
+					{{ end }} {{ if .Params.github }}
+					<a
+						href="{{ .Params.github }}"
+						target="_blank"
+						rel="noopener"
+						class="btn btn-secondary project-action-btn">
+						<span class="btn-return-type">void</span>
+						<span class="btn-method">ViewSource</span>
+						<span class="btn-params">()</span>
+					</a>
+					{{ end }}
+				</div>
+			</header>
+
+			{{/* Project Content */}}
+			<div class="project-content">
+				{{ if .Params.image }}
+				<div class="project-image">
+					<img
+						src="{{ .Params.image }}"
+						alt="{{ .Title }}"
+						class="project-screenshot" />
+				</div>
+				{{ end }}
+
+				<div class="project-body">{{ .Content }}</div>
+			</div>
+
+			{{/* Project Footer */}}
+			<footer class="project-single-footer">
+				<div class="project-brace">}</div>
+
+				<div class="project-navigation">
+					{{ with .PrevInSection }}
+					<a
+						href="{{ .Permalink }}"
+						class="project-nav-link project-nav-prev">
+						<span class="nav-direction">← Previous</span>
+						<span class="nav-title">{{ .Title }}</span>
+					</a>
+					{{ end }} {{ with .NextInSection }}
+					<a
+						href="{{ .Permalink }}"
+						class="project-nav-link project-nav-next">
+						<span class="nav-direction">Next →</span>
+						<span class="nav-title">{{ .Title }}</span>
+					</a>
+					{{ end }}
+				</div>
+
+				<div class="back-to-projects">
+					<a href="/projects" class="btn btn-outline">
+						<span class="btn-return-type">List&lt;Project&gt;</span>
+						<span class="btn-method">ViewAll</span>
+						<span class="btn-params">()</span>
+					</a>
+				</div>
+			</footer>
+		</div>
+	</article>
+</div>
+{{ end }}

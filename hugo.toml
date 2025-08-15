@@ -1,0 +1,133 @@
+baseURL = 'https://s4ndm4n82.github.io/'
+languageCode = 'en-us'
+title = 'C# Developer Portfolio'
+theme = 'csharp-portfolio'
+
+# Enable syntax highlighting
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "github"
+    lineNos = true
+    codeFences = true
+    guessSyntax = true
+    noClasses = false
+    anchorLineNos = false
+    lineAnchors = ""
+    lineNoStart = 1
+    hl_Lines = ""
+
+# Theme parameters
+[params]
+  # Personal information
+  author = "S4NDM4N"
+  description = "Full-stack C# developer passionate about clean code and innovative solutions"
+
+  # Theme settings
+  [params.theme]
+    defaultMode = "auto"
+    enableToggle = true
+    enableTypingAnimation = true
+
+  # Hero section
+  [params.hero]
+    title = "Hello, World!"
+    subtitle = "// Full-stack developer specializing in C# and .NET"
+    showTypingAnimation = true
+
+  # About section
+  [params.about]
+    description = """
+I'm a dedicated C# developer with a strong focus on full-stack development, crafting robust and scalable applications powered by modern C# and .NET technologies.
+
+Grounded in object-oriented programming and clean-code best practices, I design solutions that are not only high-performing, but also easy to maintain and evolve. My passion lies in turning complex challenges into elegant, practical software that drives real-world impact.
+"""
+    profileImage = "/images/pp.png" # Path to profile image (optional)
+    experienceStartYear = 2019  # Year when experience started
+    experience = 5
+    projects = 10
+    available = true
+
+    # Skills displayed as C# using statements
+    [[params.about.skills]]
+      category = "Microsoft"
+      name = "AspNetCore"
+
+    [[params.about.skills]]
+      category = "Microsoft"
+      name = "EntityFrameworkCore"
+
+    [[params.about.skills]]
+      category = "System"
+      name = "Linq"
+
+    [[params.about.skills]]
+      category = "Microsoft"
+      name = "Azure"
+
+    [[params.about.skills]]
+      category = "VueJS"
+      name = "Directives"
+
+    [[params.about.skills]]
+      category = "TypeScript"
+      name = "Definitions"
+
+    # Extended skill categories for about page
+    [[params.about.skillCategories]]
+      name = "Backend"
+      category = "Backend"
+      skills = ["C#", "ASP.NET Core", "Entity Framework", "SQL Server", "Postgres SQL", "Azure Functions"]
+
+    [[params.about.skillCategories]]
+      name = "Frontend"
+      category = "Frontend"
+      skills = ["VueJS", "TypeScript", "HTML5", "CSS3", "Blazor"]
+
+    [[params.about.skillCategories]]
+      name = "Tools"
+      category = "Tools"
+      skills = ["Visual Studio", "JetBrains Rider", "VS Code", "Git", "Docker", "Azure DevOps", "HUGO"]
+
+  # Social links
+  [params.social]
+    github = "s4ndm4n82"
+    linkedin = "sadaruwan-samaraweera"
+    twitter = "@sadaruwan12"
+    email = "sadaruwan12@gmail.com"
+
+  # SEO settings
+  [params.seo]
+    description = "Portfolio website showcasing C# development projects and expertise"
+    keywords = ["C#", ".NET", "developer", "portfolio", "full-stack"]
+    author = "Your Name"
+
+  # Performance settings
+  [params.performance]
+    inlineCriticalCSS = true
+    fontDisplaySwap = true
+    minifyAssets = true
+
+# Menu configuration
+[menu]
+  [[menu.main]]
+    name = "Portfolio.About"
+    url = "/about/"
+    weight = 10
+
+  [[menu.main]]
+    name = "Portfolio.Projects"
+    url = "/projects/"
+    weight = 20
+
+  [[menu.main]]
+    name = "Portfolio.Skills"
+    url = "/skills/"
+    weight = 30
+
+  [[menu.main]]
+    name = "Portfolio.Contact"
+    url = "/contact/"
+    weight = 40

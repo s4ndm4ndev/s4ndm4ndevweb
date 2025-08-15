@@ -1,0 +1,134 @@
+{{ define "main" }}
+<div class="container">
+	<section class="content-list section">
+		<div class="content-list-content">
+			<div class="content-list-header">
+				<h1 class="content-list-title">{{ .Title }}</h1>
+				{{ with .Description }}
+				<p class="content-list-description text-comment">{{ . }}</p>
+				{{ end }}
+				<div class="content-list-meta">
+					<span class="content-count">
+						<span class="code-comment"
+							>// Found {{ len .Pages }} {{ if eq (len .Pages) 1
+							}}item{{ else }}items{{ end }}</span
+						>
+					</span>
+				</div>
+			</div>
+
+			{{ if .Pages }}
+			<div class="content-list-grid">
+				{{ range .Pages }}
+				<article class="content-card">
+					<div class="content-card-header">
+						<div class="content-class-definition">
+							<span class="content-keyword">public</span>
+							<span class="content-keyword">class</span>
+							<h2 class="content-card-title">
+								<a
+									href="{{ .Permalink }}"
+									class="content-title-link"
+									>{{ .Title }}</a
+								>
+							</h2>
+						</div>
+						<div class="content-brace">{</div>
+					</div>
+
+					<div class="content-card-body">
+						{{ if .Description }}
+						<div class="content-xml-comment">
+							<span>/// &lt;summary&gt;</span>
+							<span>/// {{ .Description }}</span>
+							<span>/// &lt;/summary&gt;</span>
+						</div>
+						{{ else if .Summary }}
+						<div class="content-xml-comment">
+							<span>/// &lt;summary&gt;</span>
+							<span>/// {{ .Summary | truncate 120 }}</span>
+							<span>/// &lt;/summary&gt;</span>
+						</div>
+						{{ end }}
+
+						<div class="content-properties">
+							<div class="content-property">
+								<span class="property-keyword">public</span>
+								<span class="property-type">DateTime</span>
+								<span class="property-name">Created</span>
+								<span class="property-operator">=</span>
+								<span class="property-value"
+									>{{ .Date.Format "January 2, 2006" }}</span
+								>
+								<span class="property-semicolon">;</span>
+							</div>
+
+							{{ if .Params.tags }}
+							<div class="content-property">
+								<span class="property-keyword">public</span>
+								<span class="property-type">string[]</span>
+								<span class="property-name">Tags</span>
+								<span class="property-operator">=</span>
+								<span class="property-value">
+									{ {{ range $index, $tag := .Params.tags }}
+									{{ if $index }}, {{ end }}"{{ $tag }}" {{
+									end }} }
+								</span>
+								<span class="property-semicolon">;</span>
+							</div>
+							{{ end }}
+						</div>
+					</div>
+
+					<div class="content-card-footer">
+						<div class="content-actions">
+							<a
+								href="{{ .Permalink }}"
+								class="btn btn-outline content-action-btn">
+								<span class="btn-return-type">void</span>
+								<span class="btn-method">ReadMore</span>
+								<span class="btn-params">()</span>
+							</a>
+						</div>
+						<div class="content-brace">}</div>
+					</div>
+				</article>
+				{{ end }}
+			</div>
+			{{ else }}
+			<div class="content-empty">
+				<div class="empty-state">
+					<div class="empty-code-block">
+						<span class="code-keyword">if</span>
+						<span class="code-parentheses">(</span
+						><span class="code-variable">content</span
+						><span class="code-dot">.</span
+						><span class="code-property">Count</span>
+						<span class="code-operator">==</span>
+						<span class="code-number">0</span
+						><span class="code-parentheses">)</span>
+						<br />
+						<span class="code-brace">{</span>
+						<br />
+						&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-type"
+							>Console</span
+						><span class="code-dot">.</span
+						><span class="code-method">WriteLine</span
+						><span class="code-parentheses">(</span
+						><span class="code-string"
+							>"No content found. Check back soon!"</span
+						><span class="code-parentheses">)</span
+						><span class="code-semicolon">;</span>
+						<br />
+						<span class="code-brace">}</span>
+					</div>
+					<p class="empty-description">
+						Content is coming soon. Check back later!
+					</p>
+				</div>
+			</div>
+			{{ end }}
+		</div>
+	</section>
+</div>
+{{ end }}

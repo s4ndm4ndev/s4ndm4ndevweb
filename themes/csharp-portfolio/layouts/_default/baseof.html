@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "en" }}">
+<head>
+    {{ partial "head.html" . }}
+</head>
+<body class="theme-{{ .Site.Params.theme.defaultMode | default "auto" }}">
+    <!-- Skip navigation link for screen readers -->
+    <a href="#main" class="skip-nav">Skip to main content</a>
+
+    <div id="app">
+        {{ partial "header.html" . }}
+
+        <main id="main" role="main" tabindex="-1">
+            {{ block "main" . }}{{ end }}
+        </main>
+
+        {{ partial "footer.html" . }}
+    </div>
+
+    <!-- Performance optimization script -->
+    {{ if hugo.IsProduction }}
+    <script>
+        // Performance monitoring and optimization
+        (function() {
+            // Measure and report Core Web Vitals
+            function measureWebVitals() {
+                if ('PerformanceObserver' in window) {
+                    // Largest Contentful Paint
+                    new PerformanceObserver((list) => {
+                        const entries = list.getEntries();
+                        const lastEntry = entries[entries.length - 1];
+                        console.log('LCP:', lastEntry.startTime);
+                    }).observe({ entryTypes: ['largest-contentful-paint'] });
+
+                    // First Input Delay
+                    new PerformanceObserver((list) => {
+                        const entries = list.getEntries();
+                        entries.forEach((entry) => {
+                            console.log('FID:', entry.processingStart - entry.startTime);
+                        });
+                    }).observe({ entryTypes: ['first-input'] });
+
+                    // Cumulative Layout Shift
+                    new PerformanceObserver((list) => {
+                        let clsValue = 0;
+                        const entries = list.getEntries();
+                        entries.forEach((entry) => {
+                            if (!entry.hadRecentInput) {
+                                clsValue += entry.value;
+                            }
+                        });
+                        console.log('CLS:', clsValue);
+                    }).observe({ entryTypes: ['layout-shift'] });
+                }
+            }
+
+            // Optimize images with Intersection Observer
+            function optimizeImages() {
+                if ('IntersectionObserver' in window) {
+                    const imageObserver = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                if (img.dataset.src) {
+                                    img.src = img.dataset.src;
+                                    img.removeAttribute('data-src');
+                                    imageObserver.unobserve(img);
+                                }
+                            }
+                        });
+                    });
+
+                    document.querySelectorAll('img[data-src]').forEach((img) => {
+                        imageObserver.observe(img);
+                    });
+                }
+            }
+
+            // Initialize optimizations when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    measureWebVitals();
+                    optimizeImages();
+                });
+            } else {
+                measureWebVitals();
+                optimizeImages();
+            }
+        })();
+    </script>
+    {{ end }}
+</body>
+</html>

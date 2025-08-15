@@ -1,0 +1,190 @@
+{{ define "main" }}
+<div class="container">
+	<section class="hero section" aria-labelledby="hero-title">
+		<div class="hero-content">
+			<div class="hero-code-block" role="img" aria-label="C# code example showing a HelloWorld method">
+				<div class="hero-method">
+					<span class="code-keyword" aria-hidden="true">public</span>
+					<span class="code-type" aria-hidden="true">string</span>
+					<span class="code-method">{{ .Site.Params.hero.methodName | default "HelloWorld" }}</span><span class="code-parentheses" aria-hidden="true">()</span>
+				</div>
+				<div class="hero-method-body">
+					<span class="code-brace" aria-hidden="true">{</span>
+					<div class="hero-method-content">
+						<span class="code-type" aria-hidden="true">Console</span><span class="code-dot" aria-hidden="true">.</span><span class="code-method" aria-hidden="true">WriteLine</span><span class="code-parentheses" aria-hidden="true">(</span><span class="code-string">"{{ .Site.Params.hero.title | default "Hello, World!" }}"</span><span class="code-parentheses" aria-hidden="true">)</span><span class="code-semicolon" aria-hidden="true">;</span>
+					</div>
+					<span class="code-brace" aria-hidden="true">}</span>
+				</div>
+				<div class="hero-execution" data-execution-delay="3000" aria-live="polite">
+					<div class="execution-comment" aria-hidden="true">// Executing HelloWorld()...</div>
+					<div class="console-output">
+						<div class="console-header" aria-hidden="true">Console Output</div>
+						<div class="execution-output" data-typing-text="{{ .Site.Params.hero.title | default "Hello, World!" }}" aria-label="Output: {{ .Site.Params.hero.title | default "Hello, World!" }}"></div><span class="hero-cursor" aria-hidden="true">|</span>
+					</div>
+				</div>
+			</div>
+			<h1 id="hero-title" class="sr-only">{{ .Site.Params.hero.title | default "Hello, World!" }}</h1>
+			<p class="hero-subtitle xml-comment">
+				{{ .Site.Params.hero.subtitle | default "/// Full-stack developer specializing in C# and modern web technologies" }}
+			</p>
+
+			<div class="hero-actions">
+				<a href="/projects" class="btn btn-primary hero-btn" aria-describedby="projects-desc">
+					<span class="btn-return-type" aria-hidden="true">void</span>
+					<span class="btn-method">View Projects</span>
+					<span class="btn-params" aria-hidden="true">()</span>
+				</a>
+				<span id="projects-desc" class="sr-only">Navigate to projects page</span>
+				<a href="/contact" class="btn btn-secondary hero-btn" aria-describedby="contact-desc">
+					<span class="btn-return-type" aria-hidden="true">bool</span>
+					<span class="btn-method">Contact Me</span>
+					<span class="btn-params" aria-hidden="true">()</span>
+				</a>
+				<span id="contact-desc" class="sr-only">Navigate to contact page</span>
+			</div>
+		</div>
+	</section>
+
+	<section id="about" class="about section" aria-labelledby="about-title">
+		<div class="about-content">
+			<h2 id="about-title" class="about-title">About</h2>
+
+			<div class="about-layout">
+				<div class="about-text">
+					<div class="about-description">
+						{{ with .Site.Params.about.description }}
+							{{ . | markdownify }}
+						{{ else }}
+							<p class="text-comment">// Passionate C# developer with expertise in full-stack development</p>
+							<p>I specialize in building robust, scalable applications using modern C# and .NET technologies. With a strong foundation in object-oriented programming and clean code principles, I create solutions that are both efficient and maintainable.</p>
+
+							<div class="code-block-example">
+								<pre><code class="language-csharp">public class Developer
+{
+    public string Name { get; set; } = "{{ .Site.Params.author | default "Your Name" }}";
+    public List&lt;string&gt; Skills { get; set; } = new()
+    {
+        "C#", ".NET", "ASP.NET Core", "Entity Framework",
+        "SQL Server", "Azure", "React", "TypeScript"
+    };
+
+    public void WriteCleanCode()
+    {
+        // Always striving for excellence
+        Console.WriteLine("Building the future, one line at a time.");
+    }
+}</code></pre>
+							</div>
+						{{ end }}
+					</div>
+
+					<div class="about-skills">
+						<h3 class="skills-title">Technical Skills</h3>
+						<div class="skills-container" role="list" aria-label="List of technical skills">
+							{{ with .Site.Params.about.skills }}
+								{{ range . }}
+									<div class="skill-item" role="listitem">
+										<span class="skill-using" aria-hidden="true">using</span>
+										<span class="skill-namespace" aria-hidden="true">{{ .category | default "System" }}</span>
+										<span class="skill-dot" aria-hidden="true">.</span>
+										<span class="skill-name">{{ .name }}</span>
+										<span class="skill-semicolon" aria-hidden="true">;</span>
+									</div>
+								{{ end }}
+							{{ else }}
+								<div class="skill-item">
+									<span class="skill-using">using</span>
+									<span class="skill-namespace">Microsoft</span>
+									<span class="skill-dot">.</span>
+									<span class="skill-name">AspNetCore</span>
+									<span class="skill-semicolon">;</span>
+								</div>
+								<div class="skill-item">
+									<span class="skill-using">using</span>
+									<span class="skill-namespace">Microsoft</span>
+									<span class="skill-dot">.</span>
+									<span class="skill-name">EntityFrameworkCore</span>
+									<span class="skill-semicolon">;</span>
+								</div>
+								<div class="skill-item">
+									<span class="skill-using">using</span>
+									<span class="skill-namespace">System</span>
+									<span class="skill-dot">.</span>
+									<span class="skill-name">Linq</span>
+									<span class="skill-semicolon">;</span>
+								</div>
+								<div class="skill-item">
+									<span class="skill-using">using</span>
+									<span class="skill-namespace">Microsoft</span>
+									<span class="skill-dot">.</span>
+									<span class="skill-name">Azure</span>
+									<span class="skill-semicolon">;</span>
+								</div>
+								<div class="skill-item">
+									<span class="skill-using">using</span>
+									<span class="skill-namespace">React</span>
+									<span class="skill-dot">.</span>
+									<span class="skill-name">Components</span>
+									<span class="skill-semicolon">;</span>
+								</div>
+								<div class="skill-item">
+									<span class="skill-using">using</span>
+									<span class="skill-namespace">TypeScript</span>
+									<span class="skill-dot">.</span>
+									<span class="skill-name">Definitions</span>
+									<span class="skill-semicolon">;</span>
+								</div>
+							{{ end }}
+						</div>
+					</div>
+				</div>
+
+				<div class="about-profile">
+					<div class="profile-image-container">
+						{{ with .Site.Params.about.profileImage }}
+							<img src="{{ . }}" alt="Profile photo of {{ $.Site.Params.author | default "the developer" }}" class="profile-image" />
+						{{ else }}
+							<div class="profile-placeholder" role="img" aria-label="Profile placeholder with C# code example">
+								<div class="placeholder-code">
+									<span class="code-comment" aria-hidden="true">// Profile image</span><br>
+									<span class="code-keyword" aria-hidden="true">var</span> <span class="code-variable" aria-hidden="true">developer</span> <span class="code-operator" aria-hidden="true">=</span> <span class="code-keyword" aria-hidden="true">new</span> <span class="code-type" aria-hidden="true">Developer</span><span class="code-parentheses" aria-hidden="true">()</span><span class="code-semicolon" aria-hidden="true">;</span><br>
+									<span class="code-variable" aria-hidden="true">developer</span><span class="code-dot" aria-hidden="true">.</span><span class="code-method" aria-hidden="true">ShowProfile</span><span class="code-parentheses" aria-hidden="true">()</span><span class="code-semicolon" aria-hidden="true">;</span>
+								</div>
+							</div>
+						{{ end }}
+					</div>
+
+					<div class="profile-stats" data-experience-start-year="{{ .Site.Params.about.experienceStartYear | default 2019 }}">
+						<div class="stat-item">
+							<span class="stat-keyword">public</span>
+							<span class="stat-type">int</span>
+							<span class="stat-property">YearsExperience</span>
+							<span class="stat-operator">=</span>
+							<span class="stat-value" data-experience>{{ .Site.Params.about.experience | default "5" }}</span>
+							<span class="stat-semicolon">;</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-keyword">public</span>
+							<span class="stat-type">int</span>
+							<span class="stat-property">ProjectsCompleted</span>
+							<span class="stat-operator">=</span>
+							<span class="stat-value">{{ .Site.Params.about.projects | default "50" }}</span>
+							<span class="stat-semicolon">;</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-keyword">public</span>
+							<span class="stat-type">bool</span>
+							<span class="stat-property">AvailableForWork</span>
+							<span class="stat-operator">=</span>
+							<span class="stat-value">{{ .Site.Params.about.available | default "true" }}</span>
+							<span class="stat-semicolon">;</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+</div>
+{{ end }}

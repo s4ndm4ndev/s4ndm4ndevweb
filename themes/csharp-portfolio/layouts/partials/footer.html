@@ -1,0 +1,147 @@
+<footer class="site-footer" role="contentinfo">
+	<div class="container">
+		<div class="footer-content">
+			<!-- Contact Information Section -->
+			<div class="footer-contact">
+				<div class="footer-section-title">
+					<span class="code-keyword">public</span>
+					<span class="code-type">ContactInfo</span>
+					<span class="code-method">GetContactDetails</span
+					><span class="code-parentheses">()</span>
+				</div>
+				<div class="footer-contact-methods">
+					{{ if .Site.Params.social.email }}
+					<div class="footer-contact-method">
+						<div class="contact-method-code">
+							<span class="code-keyword">var</span>
+							<span class="code-variable">email</span>
+							<span class="code-operator">=</span>
+							<span class="code-method">Contact</span
+							><span class="code-dot">.</span
+							><span class="code-method">Email</span
+							><span class="code-parentheses">(</span>
+						</div>
+						<div class="contact-method-content">
+							<a
+								href="mailto:{{ .Site.Params.social.email }}"
+								class="contact-link">
+								<span class="code-string"
+									>{{ .Site.Params.social.email }}</span
+								>
+							</a>
+						</div>
+						<div class="contact-method-closing">
+							<span class="code-parentheses">)</span
+							><span class="code-semicolon">;</span>
+						</div>
+					</div>
+					{{ end }} {{ if .Site.Params.social.github }}
+					<div class="footer-contact-method">
+						<div class="contact-method-code">
+							<span class="code-keyword">var</span>
+							<span class="code-variable">github</span>
+							<span class="code-operator">=</span>
+							<span class="code-method">Social</span
+							><span class="code-dot">.</span
+							><span class="code-method">GitHub</span
+							><span class="code-parentheses">(</span>
+						</div>
+						<div class="contact-method-content">
+							<a
+								href="https://github.com/{{ .Site.Params.social.github }}"
+								class="contact-link"
+								target="_blank"
+								rel="noopener noreferrer">
+								<span class="code-string"
+									>{{ .Site.Params.social.github }}</span
+								>
+							</a>
+						</div>
+						<div class="contact-method-closing">
+							<span class="code-parentheses">)</span
+							><span class="code-semicolon">;</span>
+						</div>
+					</div>
+					{{ end }} {{ if .Site.Params.social.linkedin }}
+					<div class="footer-contact-method">
+						<div class="contact-method-code">
+							<span class="code-keyword">var</span>
+							<span class="code-variable">linkedin</span>
+							<span class="code-operator">=</span>
+							<span class="code-method">Social</span
+							><span class="code-dot">.</span
+							><span class="code-method">LinkedIn</span
+							><span class="code-parentheses">(</span>
+						</div>
+						<div class="contact-method-content">
+							<a
+								href="https://linkedin.com/in/{{ .Site.Params.social.linkedin }}"
+								class="contact-link"
+								target="_blank"
+								rel="noopener noreferrer">
+								<span class="code-string"
+									>{{ .Site.Params.social.linkedin }}</span
+								>
+							</a>
+						</div>
+						<div class="contact-method-closing">
+							<span class="code-parentheses">)</span
+							><span class="code-semicolon">;</span>
+						</div>
+					</div>
+					{{ end }} {{ if .Site.Params.social.twitter }}
+					<div class="footer-contact-method">
+						<div class="contact-method-code">
+							<span class="code-keyword">var</span>
+							<span class="code-variable">twitter</span>
+							<span class="code-operator">=</span>
+							<span class="code-method">Social</span
+							><span class="code-dot">.</span
+							><span class="code-method">Twitter</span
+							><span class="code-parentheses">(</span>
+						</div>
+						<div class="contact-method-content">
+							<a
+								href="https://twitter.com/{{ .Site.Params.social.twitter }}"
+								class="contact-link"
+								target="_blank"
+								rel="noopener noreferrer">
+								<span class="code-string"
+									>{{ .Site.Params.social.twitter }}</span
+								>
+							</a>
+						</div>
+						<div class="contact-method-closing">
+							<span class="code-parentheses">)</span
+							><span class="code-semicolon">;</span>
+						</div>
+					</div>
+					{{ end }}
+				</div>
+			</div>
+
+			<!-- Copyright Section -->
+			<div class="footer-copyright">
+				<div class="copyright-comment">
+					<span class="comment-prefix">// </span>
+					<span class="comment-text"
+						>© {{ now.Format "2006" }} {{ .Site.Params.author |
+						default .Site.Title }}. All rights reserved.</span
+					>
+				</div>
+				<div class="copyright-comment">
+					<span class="comment-prefix">// </span>
+					<span class="comment-text"
+						>Built with Hugo & C# Portfolio Theme</span
+					>
+				</div>
+				<div class="copyright-comment">
+					<span class="comment-prefix">// </span>
+					<span class="comment-text"
+						>Inspired by JetBrains Rider</span
+					>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>

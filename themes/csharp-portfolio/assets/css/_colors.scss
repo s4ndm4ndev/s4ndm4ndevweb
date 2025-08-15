@@ -1,0 +1,133 @@
+// JetBrains Rider Color Schemes
+// Light and Dark mode color variables
+
+// Light Mode (Rider Light Theme)
+:root {
+	// Background colors
+	--bg-primary: #ffffff;
+	--bg-secondary: #f5f5f5;
+	--bg-tertiary: #eeeeee;
+
+	// Text colors
+	--text-primary: #000000;
+	--text-secondary: #333333;
+	--text-muted: #666666;
+
+	// Syntax highlighting colors (Light mode)
+	--color-keyword: #0000ff; // Blue - keywords (class, public, etc.)
+	--color-string: #008000; // Green - strings
+	--color-comment: #808080; // Gray - comments
+	--color-number: #1750eb; // Blue - numbers
+	--color-type: #267f99; // Teal - types and classes
+	--color-method: #795e26; // Brown - methods
+	--color-property: #0451a5; // Blue - properties
+	--color-variable: #001080; // Dark blue - variables
+
+	// UI accent colors
+	--color-accent: #0078d4; // Microsoft blue
+	--color-success: #107c10; // Success green
+	--color-warning: #ff8c00; // Warning orange
+	--color-error: #d13438; // Error red
+
+	// RGB values for alpha transparency
+	--color-accent-rgb: 0, 120, 212;
+	--color-success-rgb: 16, 124, 16;
+	--color-warning-rgb: 255, 140, 0;
+	--color-error-rgb: 209, 52, 56;
+
+	// Border and shadow colors
+	--border-color: #d1d1d1;
+	--border-light: #e5e5e5;
+	--shadow-color: rgba(0, 0, 0, 0.1);
+
+	// Interactive states
+	--hover-bg: #f0f0f0;
+	--active-bg: #e0e0e0;
+	--focus-outline: #005fb8;
+}
+
+// Dark Mode (Rider Darcula Theme)
+[data-theme="dark"] {
+	// Background colors
+	--bg-primary: #2b2b2b;
+	--bg-secondary: #3c3c3c;
+	--bg-tertiary: #4a4a4a;
+
+	// Text colors
+	--text-primary: #a9b7c6;
+	--text-secondary: #bbbbbb;
+	--text-muted: #888888;
+
+	// Syntax highlighting colors (Dark mode)
+	--color-keyword: #cc7832; // Orange - keywords
+	--color-string: #6a8759; // Green - strings
+	--color-comment: #808080; // Gray - comments
+	--color-number: #6897bb; // Blue - numbers
+	--color-type: #ffc66d; // Yellow - types and classes
+	--color-method: #ffc66d; // Yellow - methods
+	--color-property: #9876aa; // Purple - properties
+	--color-variable: #a9b7c6; // Default text - variables
+
+	// UI accent colors
+	--color-accent: #4a9eff; // Bright blue
+	--color-success: #6a8759; // Success green
+	--color-warning: #cc7832; // Warning orange
+	--color-error: #bc3f3c; // Error red
+
+	// RGB values for alpha transparency
+	--color-accent-rgb: 74, 158, 255;
+	--color-success-rgb: 106, 135, 89;
+	--color-warning-rgb: 204, 120, 50;
+	--color-error-rgb: 188, 63, 60;
+
+	// Border and shadow colors
+	--border-color: #555555;
+	--border-light: #444444;
+	--shadow-color: rgba(0, 0, 0, 0.3);
+
+	// Interactive states
+	--hover-bg: #3a3a3a;
+	--active-bg: #4a4a4a;
+	--focus-outline: #4a9eff;
+}
+
+// System preference detection
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		// Apply dark theme colors when system prefers dark and no explicit light theme is set
+		--bg-primary: #2b2b2b;
+		--bg-secondary: #3c3c3c;
+		--bg-tertiary: #4a4a4a;
+
+		--text-primary: #a9b7c6;
+		--text-secondary: #bbbbbb;
+		--text-muted: #888888;
+
+		--color-keyword: #cc7832;
+		--color-string: #6a8759;
+		--color-comment: #808080;
+		--color-number: #6897bb;
+		--color-type: #ffc66d;
+		--color-method: #ffc66d;
+		--color-property: #9876aa;
+		--color-variable: #a9b7c6;
+
+		--color-accent: #4a9eff;
+		--color-success: #6a8759;
+		--color-warning: #cc7832;
+		--color-error: #bc3f3c;
+
+		--color-accent-rgb: 74, 158, 255;
+		--color-success-rgb: 106, 135, 89;
+		--color-warning-rgb: 204, 120, 50;
+		--color-error-rgb: 188, 63, 60;
+
+		--border-color: #555555;
+		--border-light: #444444;
+		--shadow-color: rgba(0, 0, 0, 0.3);
+
+		--hover-bg: #3a3a3a;
+		--active-bg: #4a4a4a;
+		--focus-outline: #4a9eff;
+	}
+}
