@@ -1,5 +1,5 @@
 # Cloudflare Worker configuration
-name = "s4ndm4ndev-portfolio"
+name = "s4ndm4ndevweb"
 compatibility_date = "2025-01-01"
 
 [build]
