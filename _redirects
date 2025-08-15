@@ -1,0 +1,11 @@
+# Redirects for Cloudflare Pages
+
+# Redirect old portfolio URLs if needed
+# /old-path/* /new-path/:splat 301
+
+# Handle SPA fallback if needed (not typically needed for Hugo)
+# /* /index.html 200
+
+# Security redirects
+/wp-admin/* / 302
+/wp-login.php / 302
