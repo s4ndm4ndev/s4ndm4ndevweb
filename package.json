@@ -18,6 +18,9 @@
 	],
 	"author": "C# Portfolio Theme",
 	"license": "MIT",
+	"engines": {
+		"node": ">=20.18.1"
+	},
 	"devDependencies": {
 		"autoprefixer": "^10.4.16",
 		"cssnano": "^6.0.1",
