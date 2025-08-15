@@ -1,4 +1,4 @@
-baseURL = 'https://s4ndm4n82.github.io/'
+baseURL = 'https://s4ndm4ndevweb.swiftscripters.workers.dev/'
 languageCode = 'en-us'
 title = 'C# Developer Portfolio'
 theme = 'csharp-portfolio'
