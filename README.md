@@ -2,11 +2,11 @@
 
 Welcome to **S4NDM4NHub**, my personal portfolio website showcasing my work as a passionate C# developer specializing in full-stack development with .NET. Built with [Hugo](https://gohugo.io/) and hosted on [GitHub Pages](https://pages.github.com/), this site highlights my projects, skills, and passion for crafting robust, scalable applications.
 
-🌐 **Live Site**: [https://s4ndm4ndevweb.swiftscripters.workers.dev](https://s4ndm4ndevweb.swiftscripters.workers.dev)
+🌐 **Live Site**: [https://s4ndm4n.dev](https://s4ndm4n.dev)
 
 ## About
 
-This portfolio reflects my journey as **S4NDM4N**, a developer who thrives on clean code, object-oriented principles, and creating solutions that are both efficient and maintainable. Explore my [Projects](https://s4ndm4ndevweb.swiftscripters.workers.dev/projects/) to see my work in action or visit the [About](https://s4ndm4ndevweb.swiftscripters.workers.dev/about/) page to learn more about me.
+This portfolio reflects my journey as **S4NDM4N**, a developer who thrives on clean code, object-oriented principles, and creating solutions that are both efficient and maintainable. Explore my [Projects](https://s4ndm4n.dev/projects/) to see my work in action or visit the [About](https://s4ndm4n.dev/about/) page to learn more about me.
 
 ## Tech Stack
 
@@ -67,7 +67,7 @@ S4NDM4N82.github.io/
 
 ## Deployment
 
-The site is automatically deployed to `https://s4ndm4ndevweb.swiftscripters.workers.dev` using Cloudflare Workers. To update the site:
+The site is automatically deployed to `https://s4ndm4n.dev` using Cloudflare Workers. To update the site:
 
 1. Make changes to content (e.g., `content/about.md` or `content/projects/`).
 2. Commit and push to the `main` branch:
@@ -95,6 +95,6 @@ Connect with me:
 
 - GitHub: [S4NDM4N82](https://github.com/S4NDM4N82)
 - Email: [sadaruwan12@gmail.com](mailto:your-email@example.com)
-- Explore my projects at [https://s4ndm4ndevweb.swiftscripters.workers.dev](https://s4ndm4ndevweb.swiftscripters.workers.dev)
+- Explore my projects at [https://s4ndm4n.dev](https://s4ndm4n.dev)
 
 Thanks for visiting **S4NDM4NHub**! Let's build something awesome together.
