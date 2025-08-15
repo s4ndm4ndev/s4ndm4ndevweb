@@ -2,18 +2,6 @@
 name = "s4ndm4ndev-portfolio"
 compatibility_date = "2024-01-01"
 
-[env.production]
-compatibility_date = "2024-01-01"
-
-[env.preview]
-compatibility_date = "2024-01-01"
-
-# Build configuration
-[build]
-command = "npm run build"
-cwd = "."
-watch_dir = "content"
-
-[build.environment_variables]
-HUGO_VERSION = "0.148.2"
-NODE_VERSION = "20.18.1"
+# Static assets configuration for Hugo site
+[assets]
+directory = "./public"
